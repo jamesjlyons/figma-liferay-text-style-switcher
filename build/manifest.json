@@ -1,0 +1,5 @@
+{ "name": "Lexicon 👉 Analytics Cloud",
+  "api": "1.0.0",
+  "main": "plugin.js",
+  "ui": "ui.html"
+}
