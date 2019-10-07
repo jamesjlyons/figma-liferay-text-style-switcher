@@ -31,19 +31,33 @@
     <p class='type type--pos-large-normal'>Change font style from Lexicon to AC</p>
     <div class="divider"></div>
     <br />
+    <p class='type type--pos-small-normal'>Change to AC Styling</p>
     <button id="change" class="button button--primary" style="width:100%">Change Font</button>
     <button id="changePage" class="button button--primary" style="width:100%">Change Font for Current Page</button>
+    <br />
+    <p class='type type--pos-small-normal'>Change to Lexicon Styling</p>
+    <button id="changeLexicon" class="button button--primary" style="width:100%">Change Font</button>
+    <button id="changePageLexicon" class="button button--primary" style="width:100%">Change Font for Current Page</button>
+    <br />
     <button id="cancel" class="button button--secondary" style="width:100%">Cancel</button>
   </div>
   
   <script>
   
     document.getElementById('change').onclick = () => {
-      parent.postMessage({ pluginMessage: { type: 'change-font' } }, '*')
+      parent.postMessage({ pluginMessage: { type: 'change-font-to-ac' } }, '*')
     }
   
     document.getElementById('changePage').onclick = () => {
-      parent.postMessage({ pluginMessage: { type: 'change-font-page' } }, '*')
+      parent.postMessage({ pluginMessage: { type: 'change-font-to-ac-page' } }, '*')
+    }
+
+    document.getElementById('changeLexicon').onclick = () => {
+      parent.postMessage({ pluginMessage: { type: 'change-font-to-lexicon' } }, '*')
+    }
+  
+    document.getElementById('changePageLexicon').onclick = () => {
+      parent.postMessage({ pluginMessage: { type: 'change-font-to-lexicon-page' } }, '*')
     }
   
     document.getElementById('cancel').onclick = () => {
