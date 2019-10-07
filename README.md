@@ -1,4 +1,4 @@
-# Lexicon2AC
+# Liferay Text Style Switcher
 
 We use Source Sans Pro instead of SF Pro in the Analytics Cloud project. 
 
