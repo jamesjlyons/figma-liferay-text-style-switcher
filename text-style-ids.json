@@ -1,5 +1,5 @@
 {
-    "currentTextIds": [
+    "lexiconTextIds": [
       {
         "key": "10regular",
         "textStyleId": "S:e48e921ec6d452b30bebb5cfbeb6e57dffd936ec,2524:4"
@@ -134,7 +134,7 @@
       }
     ],
   
-    "newTextIds": [
+    "acTextIds": [
       {
         "key": "10regular",
         "textStyleId": "S:1d1a8aed08eb21628efc517b844893c1b367b3ba,817:3"
