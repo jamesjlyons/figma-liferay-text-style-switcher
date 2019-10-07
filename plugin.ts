@@ -11,7 +11,7 @@ figma.loadFontAsync({ family: "Source Sans Pro", style: "Semibold" });
 figma.loadFontAsync({ family: "Source Sans Pro", style: "SemiBold" });
 figma.loadFontAsync({ family: "Source Sans Pro", style: "Bold" });
 
-figma.showUI(__html__);
+figma.showUI(__html__, {width:270, height:340});
 
 let textStyleMapLexiconToAc = new Map();
 let textStyleMapAcToLexicon = new Map();

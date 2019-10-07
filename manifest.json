@@ -1,6 +1,6 @@
 {
   "api": "1.0.0",
-  "name": "Lexicon 👉 Analytics Cloud",
+  "name": "Lexicon ↔ Analytics Cloud",
   "main": "plugin.ts",
   "ui": "ui.html"
 }
