@@ -39,16 +39,12 @@ function changeFontToAc() {
   const nodes = figma.currentPage.selection
   changeTextStyleForNodesToAc(nodes);
   console.log("Selected Font Changed to Source Sans");
-  figma.ui.postMessage("Selected Font Changed to Source Sans");
-  // figma.closePlugin()
 }
 
 function changeFontToAcPage() {
   const nodes = figma.currentPage.findAll(node => node.type === "TEXT");
   changeTextStyleForNodesToAc(nodes);
   console.log("Page Font Changed to Source Sans");
-  figma.ui.postMessage("Page Font Changed to Source Sans");
-  // figma.closePlugin()
 }
 
 function changeTextStyleForNodesToAc(nodes) {
@@ -56,8 +52,10 @@ function changeTextStyleForNodesToAc(nodes) {
     if ("textStyleId" in node) {
       if (textStyleMapLexiconToAc.has(node.textStyleId)) {
         node.textStyleId = textStyleMapLexiconToAc.get(node.textStyleId)
+        figma.notify("Page Font Changed to Source Sans");
       } else {
         console.warn("Missing corresponding text style id")
+        figma.notify("Missing corresponding text style")
         console.log(node.textStyleId);
       }
     }
@@ -68,16 +66,12 @@ function changeFontToLexicon() {
   const nodes = figma.currentPage.selection
   changeTextStyleForNodesToLexicon(nodes);
   console.log("Selected Font Changed to System");
-  figma.ui.postMessage("Selected Font Changed to Source Sans");
-  // figma.closePlugin()
 }
 
 function changeFontToLexiconPage() {
   const nodes = figma.currentPage.findAll(node => node.type === "TEXT");
   changeTextStyleForNodesToLexicon(nodes);
   console.log("Page Font Changed to System");
-  figma.ui.postMessage("Page Font Changed to Source Sans");
-  // figma.closePlugin()
 }
 
 function changeTextStyleForNodesToLexicon(nodes) {
@@ -85,8 +79,10 @@ function changeTextStyleForNodesToLexicon(nodes) {
     if ("textStyleId" in node) {
       if (textStyleMapAcToLexicon.has(node.textStyleId)) {
         node.textStyleId = textStyleMapAcToLexicon.get(node.textStyleId)
+        figma.notify("Font Changed to System");
       } else {
         console.warn("Missing corresponding text style id")
+        figma.notify("Missing corresponding text style");
         console.log(node.textStyleId);
       }
     }
