@@ -1,6 +1,7 @@
 {
+  "name": "Liferay Text Style Switcher",
+  "id": "762895358367912423",
   "api": "1.0.0",
-  "name": "Lexicon ↔ Analytics Cloud",
   "main": "code.js",
   "ui": "ui.html"
 }
