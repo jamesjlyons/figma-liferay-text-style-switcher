@@ -18,6 +18,8 @@ let textStyleMapAcToLexicon = new Map();
 let totalIds = textStyleIds.lexiconTextIds.length
 let error = false
 let changed = false
+let changedLayers = 0
+let unchangedLayers = 0
 
 for (var i = 0; i < totalIds; i++) {
   let lexiconTextId = textStyleIds.lexiconTextIds[i];
@@ -42,16 +44,18 @@ function changeFontToAc() {
   changeTextStyleForNodesToAc(nodes);
   console.log("Selected Font Changed to Source Sans");
   if (changed && error) {
-    figma.notify("Some fonts changed, some missing corresponding Lexicon text style")
+    figma.notify(changedLayers + " layers changed, " + unchangedLayers + " missing corresponding Lexicon text style")
     changed = false
     error = false
   } else if (changed) {
-    figma.notify("Font changed to Source Sans")
+    figma.notify(changedLayers + " layers changed to Source Sans")
     changed = false
   } else if (error) {
     figma.notify("Missing corresponding Lexicon text style")
     error = false
   }
+  changedLayers = 0
+  unchangedLayers = 0
 }
 
 function changeFontToAcPage() {
@@ -59,16 +63,18 @@ function changeFontToAcPage() {
   changeTextStyleForNodesToAc(nodes);
   console.log("Page Font Changed to Source Sans");
   if (changed && error) {
-    figma.notify("Some fonts changed, some missing corresponding Lexicon text style")
+    figma.notify(changedLayers + " layers changed, " + unchangedLayers + " missing corresponding Lexicon text style")
     changed = false
     error = false
   } else if (changed) {
-    figma.notify("Page fonts changed to Source Sans")
+    figma.notify(changedLayers + " layers changed to Source Sans")
     changed = false
   } else if (error) {
     figma.notify("Missing corresponding Lexicon text style")
     error = false
   }
+  changedLayers = 0
+  unchangedLayers = 0
 }
 
 function changeFontToLexicon() {
@@ -76,16 +82,18 @@ function changeFontToLexicon() {
   changeTextStyleForNodesToLexicon(nodes);
   console.log("Selected Font Changed to System");
   if (changed && error) {
-    figma.notify("Some fonts changed, some missing corresponding AC text style")
+    figma.notify(changedLayers + " layers changed, " + unchangedLayers + " missing corresponding AC text style")
     changed = false
     error = false
   } else if (changed) {
-    figma.notify("Font changed to SF Pro")
+    figma.notify(changedLayers + " layers changed to SF Pro")
     changed = false
   } else if (error) {
     figma.notify("Missing corresponding AC text style")
     error = false
   }
+  changedLayers = 0
+  unchangedLayers = 0
 }
 
 function changeFontToLexiconPage() {
@@ -93,16 +101,18 @@ function changeFontToLexiconPage() {
   changeTextStyleForNodesToLexicon(nodes);
   console.log("Page Font Changed to System");
   if (changed && error) {
-    figma.notify("Some fonts changed, some missing corresponding AC text style")
+    figma.notify(changedLayers + " layers changed, " + unchangedLayers + " missing corresponding AC text style")
     changed = false
     error = false
   } else if (changed) {
-    figma.notify("Page fonts changed to SF Pro")
+    figma.notify(changedLayers + " layers changed to SF Pro")
     changed = false
   } else if (error) {
     figma.notify("Missing corresponding AC text style")
     error = false
   }
+  changedLayers = 0
+  unchangedLayers = 0
 }
 
 function changeTextStyleForNodesToAc(nodes) {
@@ -111,10 +121,12 @@ function changeTextStyleForNodesToAc(nodes) {
       if (textStyleMapLexiconToAc.has(node.textStyleId)) {
         node.textStyleId = textStyleMapLexiconToAc.get(node.textStyleId)
         changed = true;
+        changedLayers++;
       } else {
         console.warn("Missing corresponding text style id")
         console.log(node.textStyleId);
         error = true;
+        unchangedLayers++;
       }
     }
   }
@@ -126,10 +138,12 @@ function changeTextStyleForNodesToLexicon(nodes) {
       if (textStyleMapAcToLexicon.has(node.textStyleId)) {
         node.textStyleId = textStyleMapAcToLexicon.get(node.textStyleId)
         changed = true;
+        changedLayers++;
       } else {
         console.warn("Missing corresponding text style id")
         console.log(node.textStyleId);
         error = true;
+        unchangedLayers++;
       }
     }
   }
