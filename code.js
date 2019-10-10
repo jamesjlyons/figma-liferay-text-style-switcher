@@ -36,7 +36,10 @@ for (var i = 0; i < totalIds; i++) {
 }
 function notifyAc() {
     if (changed && error) {
-        figma.notify(changedLayers + " layers changed, " + unchangedLayers + " missing corresponding Lexicon text style");
+        figma.notify(changedLayers +
+            " layers changed, " +
+            unchangedLayers +
+            " missing corresponding Lexicon text style");
         changed = false;
         error = false;
     }
@@ -51,7 +54,10 @@ function notifyAc() {
 }
 function notifyLexicon() {
     if (changed && error) {
-        figma.notify(changedLayers + " layers changed, " + unchangedLayers + " missing corresponding AC text style");
+        figma.notify(changedLayers +
+            " layers changed, " +
+            unchangedLayers +
+            " missing corresponding AC text style");
         changed = false;
         error = false;
     }
