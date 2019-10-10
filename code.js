@@ -13,6 +13,8 @@ figma.showUI(__html__, { width: 270, height: 340 });
 let textStyleMapLexiconToAc = new Map();
 let textStyleMapAcToLexicon = new Map();
 let totalIds = textStyleIds.lexiconTextIds.length;
+let error = false;
+let changed = false;
 for (var i = 0; i < totalIds; i++) {
     let lexiconTextId = textStyleIds.lexiconTextIds[i];
     let acTextId = textStyleIds.acTextIds[i];
@@ -34,48 +36,100 @@ function changeFontToAc() {
     const nodes = figma.currentPage.selection;
     changeTextStyleForNodesToAc(nodes);
     console.log("Selected Font Changed to Source Sans");
+    if (changed && error) {
+        figma.notify("Some fonts changed, some missing corresponding Lexicon text style");
+        changed = false;
+        error = false;
+    }
+    else if (changed) {
+        figma.notify("Font changed to Source Sans");
+        changed = false;
+    }
+    else if (error) {
+        figma.notify("Missing corresponding Lexicon text style");
+        error = false;
+    }
 }
 function changeFontToAcPage() {
     const nodes = figma.currentPage.findAll(node => node.type === "TEXT");
     changeTextStyleForNodesToAc(nodes);
     console.log("Page Font Changed to Source Sans");
-}
-function changeTextStyleForNodesToAc(nodes) {
-    for (const node of nodes) {
-        if ("textStyleId" in node) {
-            if (textStyleMapLexiconToAc.has(node.textStyleId)) {
-                node.textStyleId = textStyleMapLexiconToAc.get(node.textStyleId);
-                figma.notify("Page Font Changed to Source Sans");
-            }
-            else {
-                console.warn("Missing corresponding text style id");
-                figma.notify("Missing corresponding text style");
-                console.log(node.textStyleId);
-            }
-        }
+    if (changed && error) {
+        figma.notify("Some fonts changed, some missing corresponding Lexicon text style");
+        changed = false;
+        error = false;
+    }
+    else if (changed) {
+        figma.notify("Page fonts changed to Source Sans");
+        changed = false;
+    }
+    else if (error) {
+        figma.notify("Missing corresponding Lexicon text style");
+        error = false;
     }
 }
 function changeFontToLexicon() {
     const nodes = figma.currentPage.selection;
     changeTextStyleForNodesToLexicon(nodes);
     console.log("Selected Font Changed to System");
+    if (changed && error) {
+        figma.notify("Some fonts changed, some missing corresponding AC text style");
+        changed = false;
+        error = false;
+    }
+    else if (changed) {
+        figma.notify("Font changed to SF Pro");
+        changed = false;
+    }
+    else if (error) {
+        figma.notify("Missing corresponding AC text style");
+        error = false;
+    }
 }
 function changeFontToLexiconPage() {
     const nodes = figma.currentPage.findAll(node => node.type === "TEXT");
     changeTextStyleForNodesToLexicon(nodes);
     console.log("Page Font Changed to System");
+    if (changed && error) {
+        figma.notify("Some fonts changed, some missing corresponding AC text style");
+        changed = false;
+        error = false;
+    }
+    else if (changed) {
+        figma.notify("Page fonts changed to SF Pro");
+        changed = false;
+    }
+    else if (error) {
+        figma.notify("Missing corresponding AC text style");
+        error = false;
+    }
+}
+function changeTextStyleForNodesToAc(nodes) {
+    for (const node of nodes) {
+        if ("textStyleId" in node) {
+            if (textStyleMapLexiconToAc.has(node.textStyleId)) {
+                node.textStyleId = textStyleMapLexiconToAc.get(node.textStyleId);
+                changed = true;
+            }
+            else {
+                console.warn("Missing corresponding text style id");
+                console.log(node.textStyleId);
+                error = true;
+            }
+        }
+    }
 }
 function changeTextStyleForNodesToLexicon(nodes) {
     for (const node of nodes) {
         if ("textStyleId" in node) {
             if (textStyleMapAcToLexicon.has(node.textStyleId)) {
                 node.textStyleId = textStyleMapAcToLexicon.get(node.textStyleId);
-                figma.notify("Font Changed to System");
+                changed = true;
             }
             else {
                 console.warn("Missing corresponding text style id");
-                figma.notify("Missing corresponding text style");
                 console.log(node.textStyleId);
+                error = true;
             }
         }
     }
