@@ -267,5 +267,14 @@
         "key": "40bold",
         "textStyleId": "S:aed3efa38283145574bc0dfcee95cd21bb300869,817:23"
       }
+    ],
+
+    "unstyledFont": [
+      {
+        "key": "10regular",
+        "fontSize": "10",
+        "fontName": {"family": "Source Sans Pro", "style": "Regular"},
+        "textStyleId": ""
+      }
     ]
   }

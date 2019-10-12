@@ -37,6 +37,7 @@
   <p class="type type--pos-large-bold">Change to Lexicon Styling</p>
   <button id="changeLexicon" class="button button--primary" style="width:100%">Change Font</button>
   <button id="changePageLexicon" class="button button--primary" style="width:100%">Change Font for Current Page</button>
+  <button id="styleLexicon" class="button button--primary" style="width:100%">Style 💅</button>
   <br />
   <button id="cancel" class="button button--secondary" style="width:100%">Cancel</button>
 </div>
@@ -57,6 +58,10 @@
   
     document.getElementById('changePageLexicon').onclick = () => {
       parent.postMessage({ pluginMessage: { type: 'change-font-to-lexicon-page' } }, '*')
+    }
+
+    document.getElementById('styleLexicon').onclick = () => {
+      parent.postMessage({ pluginMessage: { type: 'style-text' } }, '*')
     }
   
     document.getElementById('cancel').onclick = () => {
