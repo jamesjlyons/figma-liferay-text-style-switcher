@@ -18,6 +18,7 @@ let error = false;
 let changed = false;
 let changedLayers = 0;
 let unchangedLayers = 0;
+let notificationTime = 2000;
 for (var i = 0; i < totalIds; i++) {
     let lexiconTextId = textStyleIds.lexiconTextIds[i];
     let acTextId = textStyleIds.acTextIds[i];
@@ -47,16 +48,20 @@ function notifyAc() {
         figma.notify(changedLayers +
             " layers changed, " +
             unchangedLayers +
-            " missing corresponding Lexicon text style");
+            " missing corresponding Lexicon text style", { timeout: notificationTime });
         changed = false;
         error = false;
     }
     else if (changed) {
-        figma.notify(changedLayers + " layers changed to Source Sans");
+        figma.notify(changedLayers + " layers changed to Source Sans", {
+            timeout: notificationTime
+        });
         changed = false;
     }
     else if (error) {
-        figma.notify("Missing corresponding Lexicon text style");
+        figma.notify("Missing corresponding Lexicon text style", {
+            timeout: notificationTime
+        });
         error = false;
     }
 }
@@ -65,16 +70,20 @@ function notifyLexicon() {
         figma.notify(changedLayers +
             " layers changed, " +
             unchangedLayers +
-            " missing corresponding AC text style");
+            " missing corresponding AC text style", { timeout: notificationTime });
         changed = false;
         error = false;
     }
     else if (changed) {
-        figma.notify(changedLayers + " layers changed to SF Pro");
+        figma.notify(changedLayers + " layers changed to SF Pro", {
+            timeout: notificationTime
+        });
         changed = false;
     }
     else if (error) {
-        figma.notify("Missing corresponding AC text style");
+        figma.notify("Missing corresponding AC text style", {
+            timeout: notificationTime
+        });
         error = false;
     }
 }
